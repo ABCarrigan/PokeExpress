@@ -48,13 +48,16 @@ app.get('/pokemon/:id/edit', (req, res) => {
         }
     })
 })
-// second portion of edit route
 app.put('/pokemon/:id', (req, res) =>{
     Pokemon.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, foundPokemon) =>{
         res.redirect('/pokemon')
     })
 })
-
+app.delete('/pokemon/:id', (req, res) =>{
+    Pokemon.findByIdAndRemove(req.params.id, (err, data) =>{
+        res.redirect('/pokemon')
+    })
+})
 
 db.once('open', () => {
     console.log('server.js: connected to mongo')
