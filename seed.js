@@ -14,7 +14,7 @@ const seedPokemon = [
     {name: "squirtle", img: "http://img.pokemondb.net/artwork/squirtle"},
     {name: "wartortle", img: "http://img.pokemondb.net/artwork/wartortle"}
  ]
-const seedDB = async () => {
+ const seedDB = async () => {
     await Pokemon.deleteMany({})
     await Pokemon.insertMany(seedPokemon)
 }
