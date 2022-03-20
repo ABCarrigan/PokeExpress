@@ -8,9 +8,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(methodOverride('_method'))
 //mongoDB connection
 const db = require('./models/db');
-db.once('open', () => {
-    console.log('server.js: connected to mongo')
-})
+
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 
@@ -41,8 +39,9 @@ app.get('/pokemon/:id', (req, res) => {
     })
 })
 
-
-
+db.once('open', () => {
+    console.log('server.js: connected to mongo')
+})
 //connection
 app.listen(process.env.PORT || 3000, () => {
     console.log('Listening on port')
