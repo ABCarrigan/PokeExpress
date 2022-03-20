@@ -39,6 +39,23 @@ app.get('/pokemon/:id', (req, res) => {
     })
 })
 
+app.get('/pokemon/:id/edit', (req, res) => {
+    Pokemon.findById(req.params.id, (error, foundPokemon) =>{
+        if(!error) {
+            res.render('Edit', { pokemon: foundPokemon })
+        } else {
+            res.send({ msg: err.message })
+        }
+    })
+})
+// second portion of edit route
+app.put('/pokemon/:id', (req, res) =>{
+    Pokemon.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, foundPokemon) =>{
+        res.redirect('/pokemon')
+    })
+})
+
+
 db.once('open', () => {
     console.log('server.js: connected to mongo')
 })
